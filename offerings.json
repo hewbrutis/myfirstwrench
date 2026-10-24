@@ -22,13 +22,13 @@
       "id": "oil-lesson",
       "name": "Oil Lesson",
       "price": 85,
-      "duration": "90 min",
+      "duration": "",
       "tag": "Start here",
       "featured": false,
-      "summary": "Ninety minutes. Oil and filter. They crawl under, they drain it, they put it back. Next oil change they already know.",
-      "hero": "About 90 minutes. Oil + filter. Tire rotation or spare tire and jack is +$40 the same day.",
+      "summary": "Oil and filter. They crawl under, they drain it, they put it back. Next oil change they already know.",
+      "hero": "Oil + filter. Tire rotation or spare tire and jack is +$40 the same day.",
       "includes": [
-        "Oil + filter, about 90 minutes",
+        "Oil + filter",
         "On your vehicle, in your driveway",
         "They turn the wrenches",
         "Want a tire rotation or the spare tire and jack the same day? Add $40 each. Either skill by itself is $65 - message me."
@@ -58,7 +58,7 @@
       "duration": "",
       "tag": "Go further",
       "featured": false,
-      "summary": "Leaving for school, a job, or a long drive? Core 3 (oil, spare tire, brakes), then rotors, then two extras they will actually hit.",
+      "summary": "Leaving for school, a job, or a long drive? Core 3 (oil, spare tire, brakes), then rotors, then pick two more lessons.",
       "hero": "Core 3 (oil, spare tire, brakes) + rotors + two extras (head lights/tail lights, spark plugs / coil packs, fluids checks, or air/cabin filters).",
       "includes": [
         "Core 3, plus rotors - oil, spare tire, and one-axle brakes included",
