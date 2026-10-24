@@ -3,7 +3,7 @@
   "brand": {
     "name": "My First Wrench",
     "byline": "by Raz",
-    "tagline": "Driveway car lessons for teens and kids"
+    "tagline": "Driveway car lessons for teens"
   },
   "contact": {
     "email": "myfirstwrench@gmail.com",
@@ -58,10 +58,10 @@
       "tag": "Go further",
       "featured": false,
       "summary": "Leaving for school, a job, or a long drive? Core 3, then rotors, then two extras they will actually hit.",
-      "hero": "Core 3 + rotors + two extras (light bulbs, spark plugs / coil packs, or fluids and filters).",
+      "hero": "Core 3 + rotors + two extras (head lights/tail lights, spark plugs / coil packs, fluids checks, or air/cabin filters).",
       "includes": [
         "Core 3, plus rotors",
-        "Two extras you pick: light bulbs, spark plugs / coil packs, or fluids and filters",
+        "Two extras you pick: head lights/tail lights, spark plugs / coil packs, fluids checks, or air/cabin filters.",
         "Best if they are about to drive on their own"
       ]
     }
@@ -71,7 +71,7 @@
     {
       "id": "post-3",
       "tag": "Short",
-      "body": "I’ll teach your kid to work on their own car. Driveway, their tools or mine, they turn the wrenches.\n\nOil lesson $85. Spare same day +$40. Core 3 $230."
+      "body": "I’ll teach your teen to work on their own car. Driveway, their tools or mine, they turn the wrenches.\n\nOil lesson $85. Spare same day +$40. Core 3 $230."
     }
   ]
 }

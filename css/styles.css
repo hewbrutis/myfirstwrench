@@ -281,10 +281,10 @@ h2 {
 .package-item {
     background: #fffaf1;
     border: 1px solid var(--card-border);
+    border-radius: 8px;
     padding: 25px;
     margin-bottom: 20px;
     position: relative;
-    border-radius: 8px;
 }
 .package-item.featured {
     border: 2px solid var(--accent);

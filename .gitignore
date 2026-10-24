@@ -1,0 +1,15 @@
+# Local-only / internal
+KIKI-HANDOFF-*.md
+myfirstwrench-copy-recs-*.md
+JOB-REPLACEMENT-130K.md
+offerings.v1-80-225-350.json
+_check-copy.js
+js/_serve.js
+social/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
