@@ -1,0 +1,77 @@
+{
+  "_howToEdit": "THIS IS THE ONLY FILE YOU NEED TO EDIT for prices, packages, and the contact email. Change a number or a sentence, save, refresh the site. Do not edit the HTML for a price change. price is a number: 85 means $85. Menu C live (23 Oct 2026). Old $80/$225/$350 menu is in offerings.v1-80-225-350.json.",
+  "brand": {
+    "name": "My First Wrench",
+    "byline": "by Raz",
+    "tagline": "Driveway car lessons for teens and kids"
+  },
+  "contact": {
+    "email": "myfirstwrench@gmail.com",
+    "cta": "Message Raz to book"
+  },
+  "notes": {
+    "partsExtra": "Parts and fluids are extra — you buy them, or I bill at cost. Parent can watch. Spare tire and jack is +$40 the same visit as oil (or $65 if that is the only skill). Brakes, one axle, are $130 / about 2 hours if booked on their own.",
+    "partsFine": "Parts and fluids are not in the lesson price. You buy them, or I bill at cost. Floor to come out is $65 — no $50 driveway run. Spare tire and jack +$40 same day as oil, or $65 alone."
+  },
+  "otherServices": {
+    "title": "Dirt bikes, four-wheelers, and jobs not listed",
+    "body": "Cars are the main lessons. I also teach basic maintenance on dirt bikes and four-wheelers — oil, chains, tires, filters, the stuff that keeps them running.\n\nNeed something that is not on this page? Message me and ask. If I can teach it on your machine, we will figure it out."
+  },
+  "packages": [
+    {
+      "id": "oil-lesson",
+      "name": "Oil Lesson",
+      "price": 85,
+      "duration": "90 min",
+      "tag": "Start here",
+      "featured": false,
+      "summary": "Ninety minutes. Oil and filter. They crawl under, they drain it, they put it back. Next oil change they already know.",
+      "hero": "About 90 minutes. Oil + filter. Spare tire and jack is +$40 the same day.",
+      "includes": [
+        "Oil + filter, about 90 minutes",
+        "On your vehicle, in your driveway",
+        "They turn the wrenches",
+        "Want the spare tire and jack the same day? Add $40. That skill by itself is $65 — message me."
+      ]
+    },
+    {
+      "id": "core-3",
+      "name": "Core 3",
+      "price": 230,
+      "duration": "",
+      "tag": "Most useful",
+      "featured": true,
+      "summary": "Oil, spare, and one-axle brakes. The three things that leave them stranded.",
+      "hero": "Oil, spare tire, and brake pads on one axle. Featured. Split visits if needed.",
+      "includes": [
+        "Oil + spare + brake pads on two wheels (front or rear)",
+        "Split across visits if a Saturday is not enough",
+        "Brake day is the long one — already in the $230",
+        "$25 less than booking those three separate"
+      ]
+    },
+    {
+      "id": "full-basics",
+      "name": "Full Basics",
+      "price": 360,
+      "duration": "",
+      "tag": "Go further",
+      "featured": false,
+      "summary": "Leaving for school, a job, or a long drive? Core 3, then rotors, then two extras they will actually hit.",
+      "hero": "Core 3 + rotors + two extras (light bulbs, spark plugs / coil packs, or fluids and filters).",
+      "includes": [
+        "Core 3, plus rotors",
+        "Two extras you pick: light bulbs, spark plugs / coil packs, or fluids and filters",
+        "Best if they are about to drive on their own"
+      ]
+    }
+  ],
+  "posts": [],
+  "draftPosts": [
+    {
+      "id": "post-3",
+      "tag": "Short",
+      "body": "I’ll teach your kid to work on their own car. Driveway, their tools or mine, they turn the wrenches.\n\nOil lesson $85. Spare same day +$40. Core 3 $230."
+    }
+  ]
+}
