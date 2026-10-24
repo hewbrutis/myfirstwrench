@@ -13,3 +13,9 @@ Thumbs.db
 *.swp
 .vscode/
 .idea/
+
+# Local Cloudflare / probe files
+.wrangler/
+wrangler.toml
+_cf-check.ps1
+_*.ps1
