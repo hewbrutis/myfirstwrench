@@ -18,6 +18,7 @@
                 <a href="about.html">About</a>
                 <a href="packages.html">Packages</a>
                 <a href="savings.html">The Math</a>
+                <a href="faq.html">FAQ</a>
                 <a href="book.html" aria-current="page">Book a Session</a>
             </div>
         </nav>
@@ -26,7 +27,7 @@
         <header class="hero">
             <p class="tagline">Book</p>
             <h1>Pick a Saturday. Or a weekday after school.</h1>
-            <p class="subheadline">Kuna and surrounding areas. Tell me who is learning and which car. I email back. No card on this site.</p>
+            <p class="subheadline">Kuna and surrounding areas. Tell me who is learning and which car. I email back. Payments taken after the job is finished.</p>
         </header>
 
         <section>
@@ -117,7 +118,15 @@
                     <label for="message">Anything else I should know</label>
                     <textarea id="message" name="message" placeholder="Teen’s age, Saturday vs weekday, parts on hand, dirt bike / four-wheeler, a job not listed…"></textarea>
                 </div>
-                <p class="note-muted">No payment on this site. We pick a time first. Parts and fluids stay extra.</p>
+                <fieldset class="waiver">
+                    <legend>Required waiver</legend>
+                    <p>This is a hands-on lesson on a real car. Jacks, fluids, and moving parts can hurt someone. By booking, you agree you cannot hold Raz or My First Wrench liable if anyone is injured. If the student is a minor, you are their parent or guardian and you agree for them.</p>
+                    <div class="waiver-check">
+                        <input id="waiver" name="waiver" type="checkbox" value="accepted" required>
+                        <label for="waiver">I have read this and I agree. I will not hold Raz or My First Wrench liable if someone gets hurt.</label>
+                    </div>
+                </fieldset>
+                <p class="note-muted">Payments taken after the job is finished. We pick a time first. Parts and fluids charged at cost.</p>
                 <button class="btn btn-center" type="submit">Message Raz to book</button>
                 <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
             </form>

@@ -10,12 +10,12 @@
     "cta": "Message Raz to book"
   },
   "notes": {
-    "partsExtra": "Parts and fluids are extra — you buy them, or I bill at cost. Parent can watch. Tire rotation or spare tire and jack is +$40 the same visit as oil (or $65 if that is the only skill). Brakes, one axle, are $130 / about 2 hours if booked on their own.",
-    "partsFine": "Parts and fluids are not in the lesson price. You buy them, or I bill at cost. Floor to come out is $65 — no $50 driveway run. Tire rotation or spare tire and jack +$40 same day as oil, or $65 alone."
+    "partsExtra": "Parts and fluids are extra - you buy them, or I bill at cost. Parent can watch. Tire rotation or spare tire and jack is +$40 the same visit as oil (or $65 if that is the only skill). Brakes, one axle, are $130 / about 2 hours if booked on their own.",
+    "partsFine": "Parts and fluids are not in the lesson price. You buy them, or I bill at cost. Floor to come out is $65 - no $50 driveway run. Tire rotation or spare tire and jack +$40 same day as oil, or $65 alone."
   },
   "otherServices": {
     "title": "Dirt bikes, four-wheelers, and jobs not listed",
-    "body": "Cars are the main lessons. I also teach basic maintenance on dirt bikes and four-wheelers — oil, chains, tires, filters, the stuff that keeps them running.\n\nNeed something that is not on this page? Message me and ask. If I can teach it on your machine, we will figure it out."
+    "body": "Cars are the main lessons. I also teach basic maintenance on dirt bikes and four-wheelers - oil, chains, tires, filters, the stuff that keeps them running.\n\nNeed something that is not on this page? Message me and ask. If I can teach it on your machine, we will figure it out."
   },
   "packages": [
     {
@@ -31,7 +31,7 @@
         "Oil + filter, about 90 minutes",
         "On your vehicle, in your driveway",
         "They turn the wrenches",
-        "Want a tire rotation or the spare tire and jack the same day? Add $40 each. Either skill by itself is $65 — message me."
+        "Want a tire rotation or the spare tire and jack the same day? Add $40 each. Either skill by itself is $65 - message me."
       ]
     },
     {
@@ -41,12 +41,12 @@
       "duration": "",
       "tag": "Most useful",
       "featured": true,
-      "summary": "Oil, spare, and one-axle brakes. The three things that leave them stranded.",
+      "summary": "Oil, spare tire, and one-axle brakes. The three things that leave them stranded.",
       "hero": "Oil, spare tire, and brake pads on one axle. Featured. Split visits if needed.",
       "includes": [
-        "Oil + spare + brake pads on two wheels (front or rear)",
+        "Oil + spare tire + brake pads on two wheels (front or rear)",
         "Split across visits if a Saturday is not enough",
-        "Brake day is the long one — already in the $230",
+        "Brake day is the long one - already in the $230",
         "$25 less than booking those three separate",
         "Want a tire rotation the same visit? Add $40."
       ]
@@ -58,10 +58,10 @@
       "duration": "",
       "tag": "Go further",
       "featured": false,
-      "summary": "Leaving for school, a job, or a long drive? Core 3 (oil, spare, brakes), then rotors, then two extras they will actually hit.",
-      "hero": "Core 3 (oil, spare, brakes) + rotors + two extras (head lights/tail lights, spark plugs / coil packs, fluids checks, or air/cabin filters).",
+      "summary": "Leaving for school, a job, or a long drive? Core 3 (oil, spare tire, brakes), then rotors, then two extras they will actually hit.",
+      "hero": "Core 3 (oil, spare tire, brakes) + rotors + two extras (head lights/tail lights, spark plugs / coil packs, fluids checks, or air/cabin filters).",
       "includes": [
-        "Core 3, plus rotors — oil, spare, and one-axle brakes included",
+        "Core 3, plus rotors - oil, spare tire, and one-axle brakes included",
         "Two extras you pick: head lights/tail lights, spark plugs / coil packs, fluids checks, or air/cabin filters.",
         "Best if they are about to drive on their own",
         "Want a tire rotation the same visit? Add $40."
@@ -73,7 +73,7 @@
     {
       "id": "post-3",
       "tag": "Short",
-      "body": "I’ll teach your teen to work on their own car. Driveway, their tools or mine, they turn the wrenches.\n\nOil lesson $85 (oil and filter). Tire rotation or spare same day +$40. Core 3 $230."
+      "body": "I'll teach your teen to work on their own car. Driveway, their tools or mine, they turn the wrenches.\n\nOil lesson $85 (oil and filter). Tire rotation or spare tire same day +$40. Core 3 $230."
     }
   ]
 }
