@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a session — My First Wrench by Raz</title>
+    <meta name="description" content="Message Raz to book a driveway car lesson. Oil Lesson $85, Core 3 $230, Full Basics $360.">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="container">
+        <nav>
+            <a href="index.html" class="logo">My First Wrench <span style="font-weight:300;">by Raz</span></a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="packages.html">Packages</a>
+                <a href="savings.html">The Math</a>
+                <a href="book.html" aria-current="page">Book a Session</a>
+            </div>
+        </nav>
+
+        <main id="main">
+        <header class="hero">
+            <p class="tagline">Book</p>
+            <h1>Pick a Saturday. Or a weekday after school.</h1>
+            <p class="subheadline">Kuna and nearby. Tell me who is learning and which car. I email back. No card on this site.</p>
+        </header>
+
+        <section>
+            <h2>Message Raz to Book</h2>
+            <p>This form opens your email to <span data-contact-email>myfirstwrench@gmail.com</span>. Cars are the main lessons. Dirt bikes, four-wheelers, and jobs not listed — just say so in the note.</p>
+            <form id="book-form" class="book" name="book-a-session" method="POST" data-book-form data-static-form-name="book-a-session" action="mailto:myfirstwrench@gmail.com" style="margin-top:25px;">
+                <input type="hidden" name="form-name" value="book-a-session">
+                <div class="form-group">
+                    <label for="name">Your name</label>
+                    <input id="name" name="name" type="text" autocomplete="name" required>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input id="phone" name="phone" type="tel" autocomplete="tel">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contact-pref">Best way to contact you</label>
+                    <select id="contact-pref" name="contact-pref" required>
+                        <option value="">Choose one</option>
+                        <option value="phone">Phone</option>
+                        <option value="text">Text</option>
+                        <option value="email">Email</option>
+                    </select>
+                </div>
+                <fieldset class="choice-or" data-choice-or>
+                    <legend>What they should learn</legend>
+                    <p class="note-muted">Pick <strong>one</strong>: a package <em>or</em> a single skill. Not both.</p>
+                    <div class="or-grid">
+                        <div class="form-group">
+                            <label for="package">Package</label>
+                            <select id="package" name="package">
+                                <option value="">Not sure yet</option>
+                                <option value="oil-lesson">Oil Lesson — $85 (90 min)</option>
+                                <option value="core-3">Core 3 — $230</option>
+                                <option value="full-basics">Full Basics — $360</option>
+                            </select>
+                        </div>
+                        <p class="or-divider" aria-hidden="true">or</p>
+                        <div class="form-group">
+                            <label for="skill">One skill instead</label>
+                            <select id="skill" name="skill">
+                                <option value="">Not sure yet</option>
+                                <option value="oil">Oil lesson — default visit</option>
+                                <option value="spare">Spare tire and jack — +$40 same day, or $65 alone</option>
+                                <option value="brakes">Brake pads, one axle — long skill (~2 hr / $130)</option>
+                                <option value="other">Dirt bike, four-wheeler, or a job not listed</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="vehicle-picker" data-vehicle-picker>
+                    <legend>Their vehicle</legend>
+                    <p class="note-muted">Year, make, and model help me show up ready. Prefer to paste the VIN? I can look it up for you.</p>
+                    <div class="form-group">
+                        <label for="vin">VIN <span class="optional">(optional)</span></label>
+                        <div class="vin-row">
+                            <input type="text" id="vin" name="vin" maxlength="17" autocomplete="off" spellcheck="false" placeholder="17 characters on the dash or door sticker">
+                            <button type="button" class="btn btn-secondary" data-vin-lookup>Look up VIN</button>
+                        </div>
+                        <p class="note-muted" data-vin-status role="status" aria-live="polite"></p>
+                    </div>
+                    <div class="row row-3">
+                        <div class="form-group">
+                            <label for="year">Year</label>
+                            <input type="text" id="year" name="year" list="year-list" placeholder="Search year" autocomplete="off">
+                            <datalist id="year-list"></datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="make">Make</label>
+                            <input type="text" id="make" name="make" list="make-list" placeholder="Search make" autocomplete="off">
+                            <datalist id="make-list"></datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="model">Model</label>
+                            <input type="text" id="model" name="model" list="model-list" placeholder="Search model" autocomplete="off">
+                            <datalist id="model-list"></datalist>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <label for="message">Anything else I should know</label>
+                    <textarea id="message" name="message" placeholder="Kid’s age, Saturday vs weekday, parts on hand, dirt bike / four-wheeler, a job not listed…"></textarea>
+                </div>
+                <p class="note-muted">No payment on this site. We pick a time first. Parts and fluids stay extra.</p>
+                <button class="btn btn-center" type="submit">Message Raz to book</button>
+                <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 <strong>My First Wrench</strong> by Raz. All rights reserved.</p>
+            <p style="font-size:0.8rem; margin-top:5px;">Kuna, Idaho. Driveway car lessons.</p>
+            <p style="font-size:0.8rem; margin-top:5px;">
+                <a href="index.html">Home</a> ·
+                <a href="about.html">About</a> ·
+                <a href="packages.html">Packages</a> ·
+                <a href="savings.html">The Math</a> ·
+                <a href="mailto:myfirstwrench@gmail.com" data-contact-mailto>myfirstwrench@gmail.com</a>
+            </p>
+        </footer>
+    </div>
+    <script src="js/site.js"></script>
+</body>
+</html>
