@@ -25,10 +25,10 @@
       "duration": "90 min",
       "tag": "Start here",
       "featured": false,
-      "summary": "Ninety minutes. Oil and filter. They crawl under, they drain it, they put it back. Next oil change they already know.",
-      "hero": "About 90 minutes. Oil + filter. Spare tire and jack is +$40 the same day.",
+      "summary": "Ninety minutes. Oil, filter, and a tire rotation. They crawl under, they drain it, they put it back. Next oil change they already know.",
+      "hero": "About 90 minutes. Oil + filter + tire rotation. Spare tire and jack is +$40 the same day.",
       "includes": [
-        "Oil + filter, about 90 minutes",
+        "Oil + filter + tire rotation, about 90 minutes",
         "On your vehicle, in your driveway",
         "They turn the wrenches",
         "Want the spare tire and jack the same day? Add $40. That skill by itself is $65 — message me."
@@ -41,10 +41,10 @@
       "duration": "",
       "tag": "Most useful",
       "featured": true,
-      "summary": "Oil, spare, and one-axle brakes. The three things that leave them stranded.",
-      "hero": "Oil, spare tire, and brake pads on one axle. Featured. Split visits if needed.",
+      "summary": "Oil, tire rotation, spare, and one-axle brakes. The three things that leave them stranded.",
+      "hero": "Oil, tire rotation, spare tire, and brake pads on one axle. Featured. Split visits if needed.",
       "includes": [
-        "Oil + spare + brake pads on two wheels (front or rear)",
+        "Oil + tire rotation + spare + brake pads on two wheels (front or rear)",
         "Split across visits if a Saturday is not enough",
         "Brake day is the long one — already in the $230",
         "$25 less than booking those three separate"
@@ -57,10 +57,10 @@
       "duration": "",
       "tag": "Go further",
       "featured": false,
-      "summary": "Leaving for school, a job, or a long drive? Core 3, then rotors, then two extras they will actually hit.",
-      "hero": "Core 3 + rotors + two extras (head lights/tail lights, spark plugs / coil packs, fluids checks, or air/cabin filters).",
+      "summary": "Leaving for school, a job, or a long drive? Core 3 (oil, tire rotation, spare, brakes), then rotors, then two extras they will actually hit.",
+      "hero": "Core 3 (oil, tire rotation, spare, brakes) + rotors + two extras (head lights/tail lights, spark plugs / coil packs, fluids checks, or air/cabin filters).",
       "includes": [
-        "Core 3, plus rotors",
+        "Core 3, plus rotors — oil, tire rotation, spare, and one-axle brakes included",
         "Two extras you pick: head lights/tail lights, spark plugs / coil packs, fluids checks, or air/cabin filters.",
         "Best if they are about to drive on their own"
       ]
@@ -71,7 +71,7 @@
     {
       "id": "post-3",
       "tag": "Short",
-      "body": "I’ll teach your teen to work on their own car. Driveway, their tools or mine, they turn the wrenches.\n\nOil lesson $85. Spare same day +$40. Core 3 $230."
+      "body": "I’ll teach your teen to work on their own car. Driveway, their tools or mine, they turn the wrenches.\n\nOil lesson $85 (oil, filter, and a tire rotation). Spare same day +$40. Core 3 $230."
     }
   ]
 }
