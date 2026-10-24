@@ -1,5 +1,5 @@
 /**
- * My First Wrench - site behavior
+ * My First Wrench — site behavior
  *
  * Prices, packages, ad copy, and the contact email are NOT in this file.
  * They live in /offerings.json. This script fetches that file and fills the
@@ -17,7 +17,7 @@
   }
 
   function optionLabel(pkg) {
-    var label = pkg.name + " - " + money(pkg.price);
+    var label = pkg.name + " — " + money(pkg.price);
     if (pkg.duration) label += " (" + pkg.duration + ")";
     return label;
   }
@@ -40,7 +40,7 @@
       packages.forEach(function (pkg) {
         var li = document.createElement("li");
         var strong = document.createElement("strong");
-        strong.textContent = pkg.name + " - " + money(pkg.price);
+        strong.textContent = pkg.name + " — " + money(pkg.price);
         li.appendChild(strong);
         li.appendChild(document.createElement("br"));
         li.appendChild(document.createTextNode(pkg.hero || pkg.summary || ""));
@@ -73,7 +73,7 @@
 
         var price = document.createElement("span");
         price.className = "package-price";
-        price.appendChild(document.createTextNode(money(pkg.price));
+        price.appendChild(document.createTextNode(money(pkg.price)));
         if (pkg.duration) {
           price.appendChild(document.createTextNode(" "));
           var span = document.createElement("span");
@@ -203,11 +203,11 @@
         return;
       }
       if (pref === "email" && !emailVal) {
-        if (status) status.textContent = "Add an email - that's the best way you picked.";
+        if (status) status.textContent = "Add an email — that’s the best way you picked.";
         return;
       }
       if ((pref === "phone" || pref === "text") && !phoneVal) {
-        if (status) status.textContent = "Add a phone number - that's the best way you picked.";
+        if (status) status.textContent = "Add a phone number — that’s the best way you picked.";
         return;
       }
 
@@ -228,7 +228,7 @@
       var vehicle = [year, make, model].filter(Boolean).join(" ");
       var prefLabel = pref === "text" ? "Text" : pref === "phone" ? "Phone" : pref === "email" ? "Email" : pref;
       var lines = [
-        "Hi Raz - I want to book a driveway lesson.",
+        "Hi Raz — I want to book a driveway lesson.",
         "Name: " + name,
         "Email: " + (emailVal || "not given"),
         "Phone: " + (phoneVal || "not given"),
@@ -394,7 +394,7 @@
       if (status) status.textContent = "A VIN is 17 characters. Paste it, or skip and pick year / make / model.";
       return;
     }
-    if (status) status.textContent = "Looking that VIN up.";
+    if (status) status.textContent = "Looking that VIN up…";
     fetch(NHTSA + "/DecodeVinValues/" + encodeURIComponent(clean) + "?format=json")
       .then(function (res) { return res.ok ? res.json() : null; })
       .then(function (data) {
