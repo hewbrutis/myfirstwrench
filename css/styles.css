@@ -316,10 +316,50 @@ h2 {
     margin: 0;
 }
 .package-price {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: var(--text-main);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
     white-space: nowrap;
+    letter-spacing: -0.02em;
+}
+.price-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin: -20px 0 40px;
+}
+.price-strip a {
+    display: block;
+    background: #fffaf1;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 16px 14px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-main);
+    min-height: 44px;
+}
+.price-strip a:hover,
+.price-strip a:focus-visible {
+    border-color: var(--accent);
+}
+.price-strip .price-strip-name {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+.price-strip .price-strip-amount {
+    display: block;
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+}
+.price-strip a.featured-price {
+    border: 2px solid var(--accent);
 }
 .package-price .price-duration {
     font-size: 0.9rem;
@@ -623,6 +663,7 @@ footer a:hover {
     header h1 {
         font-size: 1.8rem;
     }
+    .price-strip,
     .math-grid,
     .how,
     .row,

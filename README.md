@@ -17,12 +17,12 @@ Do not edit the HTML for a price, a package name, an include line, or the contac
 Open `offerings.json`. Find the package. Change the number.
 
 ```
-"id": "oil-lesson",
-"name": "Oil Lesson",
-"price": 85,
+"id": "one-skill",
+"name": "One Skill Session",
+"price": 125,
 ```
 
-`85` means **$85**. Save. Refresh the site. Home, Packages, Book, and the form dropdown all follow.
+`125` means **$125**. Save. Refresh the site. Home, Packages, Book, and the form dropdown all follow.
 
 
 ### Change what a package includes
