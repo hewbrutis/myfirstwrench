@@ -44,6 +44,8 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
     padding: 20px 0;
     border-bottom: 1px solid var(--card-border);
 }
@@ -52,6 +54,12 @@ nav {
     font-size: 1.1rem;
     color: var(--primary);
     text-decoration: none;
+}
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 0;
 }
 .nav-links a {
     margin-left: 20px;
@@ -68,6 +76,21 @@ nav {
 }
 .nav-links a[aria-current="page"] {
     font-weight: 600;
+}
+.nav-links a.btn {
+    margin-left: 16px;
+    background-color: var(--accent);
+    color: #fff;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+.nav-links a.btn:hover,
+.nav-links a.btn[aria-current="page"] {
+    background-color: #b45309;
+    color: #fff;
 }
 
 header.hero,
@@ -648,6 +671,7 @@ footer a:hover {
         display: flex;
         flex-wrap: wrap;
         row-gap: 8px;
+        width: 100%;
     }
     .nav-links a {
         margin-left: 0;
@@ -655,6 +679,11 @@ footer a:hover {
         min-height: 44px;
         display: inline-flex;
         align-items: center;
+    }
+    .nav-links a.btn {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 4px;
     }
     header,
     header.hero {
