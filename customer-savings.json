@@ -1,0 +1,23 @@
+{
+  "_howToEdit": "THIS FILE is the data for customer-savings.html. Keep the HTML table in sync when you change a row. shopCost and mfwPrice are numbers in dollars. mfwPrice is the driveway lesson fee for this job. Kit and alignment are extra on both sides and called out in the page note. Live lesson prices otherwise stay One Skill Session $125 / Core 3 $350 / Full Basics Package $595.",
+  "columns": ["date", "car", "job", "shopCost", "mfwPrice", "savings", "lifetimeSkillAchieved"],
+  "note": "Shop cost is typical US coilover install labor ($400–$800; table uses $550 midpoint). My First Wrench price is the $200 driveway lesson. Coilover kit and four-wheel alignment are extra either way.",
+  "rows": [
+    {
+      "date": "Oct 25, 2026",
+      "car": "1995 Nissan Skyline GTS (R33)",
+      "job": "Coilover install (four corners)",
+      "shopCost": 550,
+      "mfwPrice": 200,
+      "savings": 350,
+      "package": "custom",
+      "lesson": 200,
+      "parts": 1410,
+      "alignment": 135,
+      "shopLaborRange": "400-800",
+      "kitNote": "BC Racing BR D-16-BR typical street kit $1,410, extra either way",
+      "alignmentNote": "Les Schwab Kuna four-wheel alignment starting at $134.99, extra either way",
+      "lifetimeSkillAchieved": true
+    }
+  ]
+}

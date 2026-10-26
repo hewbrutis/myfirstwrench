@@ -1,6 +1,6 @@
-﻿# My First Wrench
+# My First Wrench
 
-Static site for **myfirstwrench.com** — Raz’s driveway car lessons for teens.
+Static site for **myfirstwrench.com** � Raz�s driveway car lessons for teens.
 
 Driveway car lessons for teens.
 
@@ -31,7 +31,7 @@ Same file, same package. Edit `summary`, `hero`, `duration`, `tag`, or the `incl
 
 ```
 "duration": "90 min",
-"summary": "Oil + filter on their car. This is the default visit, not â€œany job.â€",
+"summary": "Oil + filter on their car. This is the default visit, not “any job.”",
 "includes": [
   "Oil + filter, about 90 minutes",
   "On your vehicle, in your driveway"
@@ -43,7 +43,7 @@ Leave `"duration": ""` if you do not want a time on the price line.
 ### Add a new offering
 
 1. Copy one object in the `packages` array.
-2. Give it a new `"id"` â€” lowercase letters and hyphens only (`brake-clinic`).
+2. Give it a new `"id"` — lowercase letters and hyphens only (`brake-clinic`).
 3. Fill in `name`, `price`, `summary`, `hero`, `tag`, and `includes`.
 4. Set `"featured": true` on the one package that should get the gold border. Keep the others `false`.
 5. Save. Refresh. The home cards, packages page, and booking dropdown all pick it up.
@@ -95,15 +95,15 @@ Do not put Stripe keys or a server in this folder.
 
 ## Files
 
-- `offerings.json` â€” prices, packages, email (edit this)
-- `index.html` â€” home: hero, how it works, three price cards, book form
-- `about.html` — mission and why Raz does this
-- `packages.html` â€” full package details, jobs, other services, FAQ
-- `savings.html` â€” shop vs driveway math (oil, pads, rotors)
-- `lessons.html` â€” redirects to packages.html (old link)
-- `book.html` â€” contact form with year / make / model + optional VIN
-- `css/styles.css` â€” look
-- `js/site.js` â€” loads offerings.json and fills the pages
-- `js/_serve.js` â€” local preview only
+- `offerings.json` — prices, packages, email (edit this)
+- `index.html` — home: hero, how it works, three price cards, book form
+- `about.html` � mission and why Raz does this
+- `packages.html` — full package details, jobs, other services, FAQ
+- `the-math.html` — shop vs driveway math (oil, pads, rotors)
+- `lessons.html` — redirects to packages.html (old link)
+- `book.html` — contact form with year / make / model + optional VIN
+- `css/styles.css` — look
+- `js/site.js` — loads offerings.json and fills the pages
+- `js/_serve.js` — local preview only
 - `assets/favicon.svg`
 - `404.html`, `_headers`
