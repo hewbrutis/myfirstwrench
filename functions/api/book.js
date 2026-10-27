@@ -14,6 +14,13 @@ export async function onRequestPost({ request }) {
       waiverAccepted = false
     } = payload;
 
+    if (!email) {
+      return new Response(JSON.stringify({ success: false, error: 'Email is required' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
     const bookingBody = `
 New Booking Request from My First Wrench website
 
@@ -30,7 +37,7 @@ Submitted: ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })}
     `.trim();
 
     // Send notification to Raz
-    await fetch('https://api.mailchannels.net/tx/v1/send', {
+    const razResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -43,13 +50,17 @@ Submitted: ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })}
           email: 'bookings@myfirstwrench.com',
           name: 'My First Wrench Booking'
         },
-        subject: `New Booking - ${name} - ${vehicle}`,
+        subject: `New Booking - ${name || 'Customer'} - ${vehicle || 'No vehicle'}`,
         content: [{
           type: 'text/plain',
           value: bookingBody
         }]
       })
     });
+
+    if (!razResponse.ok) {
+      console.error('Failed to send to Raz:', await razResponse.text());
+    }
 
     // Send confirmation to customer
     const confirmBody = `
@@ -72,7 +83,7 @@ My First Wrench
 Kuna, Idaho
     `.trim();
 
-    await fetch('https://api.mailchannels.net/tx/v1/send', {
+    const customerResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -92,6 +103,10 @@ Kuna, Idaho
         }]
       })
     });
+
+    if (!customerResponse.ok) {
+      console.error('Failed to send confirmation:', await customerResponse.text());
+    }
 
     return new Response(
       JSON.stringify({ success: true, message: "Booking request sent successfully" }),
