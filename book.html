@@ -6,7 +6,44 @@
     <title>Book a session — My First Wrench by Raz</title>
     <meta name="description" content="Message Raz to book a driveway car lesson. One Skill Session $125, Core 3 $350, Full Basics Package $595.">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="css/styles.css?v=look6">
+    <link rel="stylesheet" href="css/styles.css?v=look7">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+        }
+        .modal-content {
+            background-color: #eef6fc;
+            margin: 15% auto;
+            padding: 30px;
+            border: 4px solid #d97706;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .modal-content h3 {
+            color: #1e293b;
+            margin-top: 0;
+        }
+        .close-btn {
+            background: #d97706;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -34,17 +71,17 @@
 
         <section>
             <h2>Message Raz to Book</h2>
-            <p>This form opens your email to <span data-contact-email>myfirstwrench@gmail.com</span>. Cars are the main lessons. Dirt bikes, four-wheelers, and jobs not listed — just say so in the note.</p>
-            <form id="book-form" class="book" name="book-a-session" method="POST" data-book-form data-static-form-name="book-a-session" action="mailto:myfirstwrench@gmail.com" style="margin-top:25px;">
+            <p>This form sends your message directly to Raz. Year, Make, and Model of the car are now required so I can come prepared.</p>
+            <form id="book-form" class="book">
                 <input type="hidden" name="form-name" value="book-a-session">
                 <div class="form-group">
-                    <label for="name">Your name</label>
+                    <label for="name">Your name <span class="required">*</span></label>
                     <input id="name" name="name" type="text" autocomplete="name" required>
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input id="email" name="email" type="email" autocomplete="email">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input id="email" name="email" type="email" autocomplete="email" required>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
@@ -52,7 +89,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="contact-pref">Best way to contact you</label>
+                    <label for="contact-pref">Best way to contact you <span class="required">*</span></label>
                     <select id="contact-pref" name="contact-pref" required>
                         <option value="">Choose one</option>
                         <option value="phone">Phone</option>
@@ -88,8 +125,25 @@
                     </div>
                 </fieldset>
                 <fieldset class="vehicle-picker" data-vehicle-picker>
-                    <legend>Their vehicle</legend>
-                    <p class="note-muted">Year, make, and model help me show up ready. Prefer to paste the VIN? I can look it up for you.</p>
+                    <legend>Their vehicle <span class="required">*</span></legend>
+                    <p class="note-muted">Year, make, and model are now **required** so I can show up ready.</p>
+                    <div class="row row-3">
+                        <div class="form-group">
+                            <label for="year">Year <span class="required">*</span></label>
+                            <input type="text" id="year" name="year" list="year-list" placeholder="e.g. 1995" autocomplete="off" required>
+                            <datalist id="year-list"></datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="make">Make <span class="required">*</span></label>
+                            <input type="text" id="make" name="make" list="make-list" placeholder="e.g. Nissan" autocomplete="off" required>
+                            <datalist id="make-list"></datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="model">Model <span class="required">*</span></label>
+                            <input type="text" id="model" name="model" list="model-list" placeholder="e.g. Skyline GTS" autocomplete="off" required>
+                            <datalist id="model-list"></datalist>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="vin">VIN <span class="optional">(optional)</span></label>
                         <div class="vin-row">
@@ -97,23 +151,6 @@
                             <button type="button" class="btn btn-secondary" data-vin-lookup>Look up VIN</button>
                         </div>
                         <p class="note-muted" data-vin-status role="status" aria-live="polite"></p>
-                    </div>
-                    <div class="row row-3">
-                        <div class="form-group">
-                            <label for="year">Year</label>
-                            <input type="text" id="year" name="year" list="year-list" placeholder="Search year" autocomplete="off">
-                            <datalist id="year-list"></datalist>
-                        </div>
-                        <div class="form-group">
-                            <label for="make">Make</label>
-                            <input type="text" id="make" name="make" list="make-list" placeholder="Search make" autocomplete="off">
-                            <datalist id="make-list"></datalist>
-                        </div>
-                        <div class="form-group">
-                            <label for="model">Model</label>
-                            <input type="text" id="model" name="model" list="model-list" placeholder="Search model" autocomplete="off">
-                            <datalist id="model-list"></datalist>
-                        </div>
                     </div>
                 </fieldset>
                 <div class="form-group">
@@ -133,7 +170,7 @@
                     </div>
                 </fieldset>
                 <p class="note-muted">Payments taken after the job is finished. We pick a time first. Parts and fluids charged at cost.</p>
-                <button class="btn btn-center" type="submit">Message Raz to book</button>
+                <button class="btn btn-center" type="submit" id="submit-btn">Message Raz to book</button>
                 <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
             </form>
         </section>
@@ -154,6 +191,23 @@
             </p>
         </footer>
     </div>
-    <script src="js/site.js"></script>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <h3>Message Sent Successfully!</h3>
+            <p>Thank you. Your booking request has been sent to Raz.<br><br>Raz will be reaching out to you shortly.</p>
+            <button class="close-btn" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <script src="js/site.js?v=book7"></script>
+    <script>
+        function closeModal() {
+            document.getElementById('success-modal').style.display = 'none';
+            // Optional: redirect to home after close
+            // window.location.href = 'index.html';
+        }
+    </script>
 </body>
 </html>
