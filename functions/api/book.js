@@ -14,7 +14,7 @@ export async function onRequestPost({ request }) {
       waiverAccepted = false
     } = payload;
 
-    if (!email || !name || !vehicle || !phone) {
+    if (!name || !email || !phone || !vehicle) {
       return new Response(JSON.stringify({ success: false, error: 'Name, email, phone, and vehicle are required' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
@@ -36,32 +36,17 @@ Waiver accepted: ${waiverAccepted ? 'YES' : 'NO'}
 Submitted: ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })}
     `.trim();
 
-    // Send to Raz (myfirstwrench@gmail.com)
-    const razResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
+    // Send to Raz
+    await fetch('https://api.mailchannels.net/tx/v1/send', {
       method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
-        personalizations: [{
-          to: [{ email: 'myfirstwrench@gmail.com', name: 'Raz' }]
-        }],
-        from: {
-          email: 'bookings@myfirstwrench.com',
-          name: 'My First Wrench Booking'
-        },
+        personalizations: [{ to: [{ email: 'myfirstwrench@gmail.com', name: 'Raz' }] }],
+        from: { email: 'bookings@myfirstwrench.com', name: 'My First Wrench Booking' },
         subject: `New Booking - ${name} - ${vehicle}`,
-        content: [{
-          type: 'text/plain',
-          value: bookingBody
-        }]
+        content: [{ type: 'text/plain', value: bookingBody }]
       })
     });
-
-    if (!razResponse.ok) {
-      const errorText = await razResponse.text();
-      console.error('MailChannels Raz error:', errorText);
-    }
 
     // Send confirmation to customer
     const confirmBody = `
@@ -84,51 +69,27 @@ My First Wrench
 Kuna, Idaho
     `.trim();
 
-    const customerResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
+    await fetch('https://api.mailchannels.net/tx/v1/send', {
       method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
-        personalizations: [{
-          to: [{ email: email, name: name }]
-        }],
-        from: {
-          email: 'bookings@myfirstwrench.com',
-          name: 'My First Wrench'
-        },
+        personalizations: [{ to: [{ email: email, name: name }] }],
+        from: { email: 'bookings@myfirstwrench.com', name: 'My First Wrench' },
         subject: 'Booking Request Received - My First Wrench',
-        content: [{
-          type: 'text/plain',
-          value: confirmBody
-        }]
+        content: [{ type: 'text/plain', value: confirmBody }]
       })
     });
 
-    if (!customerResponse.ok) {
-      const errorText = await customerResponse.text();
-      console.error('MailChannels customer error:', errorText);
-    }
-
     return new Response(
-      JSON.stringify({ 
-        success: true, 
-        message: "Booking request sent successfully!" 
-      }),
-      { 
-        status: 200, 
-        headers: { 'Content-Type': 'application/json' } 
-      }
+      JSON.stringify({ success: true, message: "Booking request sent successfully!" }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
 
   } catch (err) {
     console.error('Booking function error:', err);
     return new Response(
       JSON.stringify({ success: false, error: err.message }),
-      { 
-        status: 500, 
-        headers: { 'Content-Type': 'application/json' } 
-      }
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
 }
