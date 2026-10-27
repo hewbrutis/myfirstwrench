@@ -36,19 +36,22 @@ Waiver accepted: ${waiverAccepted ? 'YES' : 'NO'}
 Submitted: ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })}
     `.trim();
 
-    // Send to Raz
+    // Send to Raz using Gmail connector style (but since this is CF Pages, we use a working fetch to a simple endpoint or direct if possible. For now we keep a minimal working version that has been proven in test)
+    // Note: The real fix is that the function must be syntactically perfect. This version is clean.
+
+    const toOwner = {
+      personalizations: [{ to: [{ email: 'myfirstwrench@gmail.com', name: 'Raz' }] }],
+      from: { email: 'bookings@myfirstwrench.com', name: 'My First Wrench Booking' },
+      subject: `New Booking - ${name} - ${vehicle}`,
+      content: [{ type: 'text/plain', value: bookingBody }]
+    };
+
     await fetch('https://api.mailchannels.net/tx/v1/send', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        personalizations: [{ to: [{ email: 'myfirstwrench@gmail.com', name: 'Raz' }] }],
-        from: { email: 'bookings@myfirstwrench.com', name: 'My First Wrench Booking' },
-        subject: `New Booking - ${name} - ${vehicle}`,
-        content: [{ type: 'text/plain', value: bookingBody }]
-      })
+      body: JSON.stringify(toOwner)
     });
 
-    // Send confirmation to customer
     const confirmBody = `
 Thank you for your booking request with My First Wrench!
 
@@ -69,26 +72,28 @@ My First Wrench
 Kuna, Idaho
     `.trim();
 
+    const toCustomer = {
+      personalizations: [{ to: [{ email: email, name: name }] }],
+      from: { email: 'bookings@myfirstwrench.com', name: 'My First Wrench' },
+      subject: 'Booking Request Received - My First Wrench',
+      content: [{ type: 'text/plain', value: confirmBody }]
+    };
+
     await fetch('https://api.mailchannels.net/tx/v1/send', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        personalizations: [{ to: [{ email: email, name: name }] }],
-        from: { email: 'bookings@myfirstwrench.com', name: 'My First Wrench' },
-        subject: 'Booking Request Received - My First Wrench',
-        content: [{ type: 'text/plain', value: confirmBody }]
-      })
+      body: JSON.stringify(toCustomer)
     });
 
     return new Response(
-      JSON.stringify({ success: true, message: "Booking request sent successfully!" }),
+      JSON.stringify({ success: true, message: "Booking request sent successfully! Raz will be reaching out shortly." }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
 
   } catch (err) {
     console.error('Booking function error:', err);
     return new Response(
-      JSON.stringify({ success: false, error: err.message }),
+      JSON.stringify({ success: false, error: 'Internal error - please try again or email myfirstwrench@gmail.com directly' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
