@@ -1,17 +1,17 @@
-export async function onRequestPost({ request, env }) {
+export async function onRequestPost({ request }) {
   try {
     const payload = await request.json();
 
     const {
-      name,
-      email,
-      phone,
-      contactPref,
-      wants,
-      vehicle,
-      vin,
-      message,
-      waiverAccepted
+      name = '',
+      email = '',
+      phone = '',
+      contactPref = '',
+      wants = 'Not sure yet',
+      vehicle = '',
+      vin = '',
+      message = '',
+      waiverAccepted = false
     } = payload;
 
     const bookingBody = `
@@ -40,7 +40,7 @@ Submitted: ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })}
           to: [{ email: 'myfirstwrench@gmail.com', name: 'Raz' }]
         }],
         from: {
-          email: 'no-reply@myfirstwrench.com',
+          email: 'bookings@myfirstwrench.com',
           name: 'My First Wrench Booking'
         },
         subject: `New Booking - ${name} - ${vehicle}`,
@@ -79,13 +79,13 @@ Kuna, Idaho
       },
       body: JSON.stringify({
         personalizations: [{
-          to: [{ email: email, name: name }]
+          to: [{ email: email, name: name || 'Customer' }]
         }],
         from: {
-          email: 'no-reply@myfirstwrench.com',
+          email: 'bookings@myfirstwrench.com',
           name: 'My First Wrench'
         },
-        subject: 'Your booking request has been received',
+        subject: 'Your booking request has been received - My First Wrench',
         content: [{
           type: 'text/plain',
           value: confirmBody
@@ -94,15 +94,21 @@ Kuna, Idaho
     });
 
     return new Response(
-      JSON.stringify({ success: true, message: "Booking request sent" }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
+      JSON.stringify({ success: true, message: "Booking request sent successfully" }),
+      { 
+        status: 200, 
+        headers: { 'Content-Type': 'application/json' } 
+      }
     );
 
   } catch (err) {
-    console.error(err);
+    console.error('Booking error:', err);
     return new Response(
-      JSON.stringify({ success: false, error: "Failed to send message" }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
+      JSON.stringify({ success: false, error: err.message }),
+      { 
+        status: 500, 
+        headers: { 'Content-Type': 'application/json' } 
+      }
     );
   }
 }
