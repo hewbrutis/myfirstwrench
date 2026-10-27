@@ -3,7 +3,8 @@
  *
  * Booking on book.html is a Formspree HTML form
  * (https://formspree.io/f/mbggobpn). Submit is AJAX so the in-page
- * success modal can show. No mailto, no MailChannels, no /api/book.
+ * success modal can show. Formspree emails Raz (form owner) and CCs
+ * the customer via _cc. No mailto, no MailChannels, no /api/book.
  */
 
 (function () {
@@ -221,6 +222,8 @@
 
       var endpoint = form.getAttribute("action") || "https://formspree.io/f/mbggobpn";
       var payload = new FormData(form);
+      payload.set("_replyto", emailVal);
+      payload.set("_cc", emailVal);
 
       var submitBtn = document.getElementById("submit-btn");
       if (submitBtn) submitBtn.disabled = true;
