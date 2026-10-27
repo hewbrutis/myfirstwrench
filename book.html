@@ -42,6 +42,14 @@
             border-radius: 6px;
             cursor: pointer;
             margin-top: 20px;
+            min-height: 44px;
+        }
+        .hp {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
         }
     </style>
 </head>
@@ -71,9 +79,12 @@
 
         <section>
             <h2>Message Raz to Book</h2>
-            <p>This form sends your message directly to Raz. Year, Make, and Model of the car are now required so I can come prepared.</p>
-            <form id="book-form" class="book">
-                <input type="hidden" name="form-name" value="book-a-session">
+            <p>This form sends your message directly to Raz. Year, make, model, and phone are required so I can come prepared.</p>
+            <form id="book-form" class="book" action="https://formspree.io/f/mbggobpn" method="POST" data-book-form>
+                <input type="hidden" name="_subject" value="New Booking Request - My First Wrench">
+                <input type="hidden" name="_replyto" id="replyto" value="">
+                <input type="hidden" name="_cc" id="form-cc" value="">
+                <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <div class="form-group">
                     <label for="name">Your name <span class="required">*</span></label>
                     <input id="name" name="name" type="text" autocomplete="name" required>
@@ -105,9 +116,9 @@
                             <label for="package">Package</label>
                             <select id="package" name="package">
                                 <option value="">Not sure yet</option>
-                                <option value="one-skill">One Skill Session — $125</option>
-                                <option value="core-3">Core 3 — $350</option>
-                                <option value="full-basics">Full Basics Package — $595</option>
+                                <option value="One Skill Session — $125">One Skill Session — $125</option>
+                                <option value="Core 3 — $350">Core 3 — $350</option>
+                                <option value="Full Basics Package — $595">Full Basics Package — $595</option>
                             </select>
                         </div>
                         <p class="or-divider" aria-hidden="true">or</p>
@@ -115,18 +126,18 @@
                             <label for="skill">One skill instead</label>
                             <select id="skill" name="skill">
                                 <option value="">Not sure yet</option>
-                                <option value="oil">Oil and filter</option>
-                                <option value="rotation">Tire rotation</option>
-                                <option value="spare">Spare tire change with your car's jack</option>
-                                <option value="brakes">Brake pads, both front or both back</option>
-                                <option value="other">Dirt bike, four-wheeler, or a job not listed</option>
+                                <option value="Oil and filter">Oil and filter</option>
+                                <option value="Tire rotation">Tire rotation</option>
+                                <option value="Spare tire change with your car's jack">Spare tire change with your car's jack</option>
+                                <option value="Brake pads, both front or both back">Brake pads, both front or both back</option>
+                                <option value="Dirt bike, four-wheeler, or a job not listed">Dirt bike, four-wheeler, or a job not listed</option>
                             </select>
                         </div>
                     </div>
                 </fieldset>
                 <fieldset class="vehicle-picker" data-vehicle-picker>
                     <legend>Their vehicle <span class="required">*</span></legend>
-                    <p class="note-muted">Year, make, and model are now **required** so I can show up ready.</p>
+                    <p class="note-muted">Year, make, and model are required so I can show up ready.</p>
                     <div class="row row-3">
                         <div class="form-group">
                             <label for="year">Year <span class="required">*</span></label>
@@ -159,11 +170,10 @@
                 </div>
                 <fieldset class="waiver">
                     <legend>Required waiver</legend>
-                    <p>BY BOOKING THIS LESSON, YOU ARE AGREEING TO THE FOLLOWING LIABILITY WAIVER AND ASSUMPTION OF RISK.
-<p>1. Inherent Risks: You acknowledge that hands-on automotive lessons involve a real car and dangerous tools. Risks include the operation of car jacks, exposure to chemical fluids, and proximity to moving mechanical parts, all of which can cause serious bodily injury, disability, or death. By proceeding, you voluntarily assume all risks associated with the activity.</p>
-<p>2. Release of Liability: You agree to release, waive, and discharge Raz and My First Wrench, along with their employees and agents, from any and all liability, claims, or demands for personal injury, property damage, or wrongful death resulting from ordinary negligence during the course of the lesson.</p>
-<p>3. Minor Students: If the student attending the lesson is under the age of 18, you certify that you are their parent or legal guardian. By completing this booking, you give explicit permission for the minor to participate and agree to all terms of this liability release on their behalf.</p>
-</p>
+                    <p>BY BOOKING THIS LESSON, YOU ARE AGREEING TO THE FOLLOWING LIABILITY WAIVER AND ASSUMPTION OF RISK.</p>
+                    <p>1. Inherent Risks: You acknowledge that hands-on automotive lessons involve a real car and dangerous tools. Risks include the operation of car jacks, exposure to chemical fluids, and proximity to moving mechanical parts, all of which can cause serious bodily injury, disability, or death. By proceeding, you voluntarily assume all risks associated with the activity.</p>
+                    <p>2. Release of Liability: You agree to release, waive, and discharge Raz and My First Wrench, along with their employees and agents, from any and all liability, claims, or demands for personal injury, property damage, or wrongful death resulting from ordinary negligence during the course of the lesson.</p>
+                    <p>3. Minor Students: If the student attending the lesson is under the age of 18, you certify that you are their parent or legal guardian. By completing this booking, you give explicit permission for the minor to participate and agree to all terms of this liability release on their behalf.</p>
                     <div class="waiver-check">
                         <input id="waiver" name="waiver" type="checkbox" value="accepted" required>
                         <label for="waiver"> Checking the agreement box and completing your booking serves as your electronic signature. You confirm that you have read this document in full, understand that you are waiving significant legal rights, and agree to it freely.</label>
@@ -192,16 +202,15 @@
         </footer>
     </div>
 
-    <!-- Success Modal -->
     <div id="success-modal" class="modal">
         <div class="modal-content">
             <h3>Message Sent Successfully!</h3>
             <p>Thank you. Your booking request has been sent to Raz.<br><br>Raz will be reaching out to you shortly.</p>
-            <button class="close-btn" onclick="closeModal()">OK</button>
+            <button class="close-btn" type="button" onclick="closeModal()">OK</button>
         </div>
     </div>
 
-    <script src="js/site.js?v=book8"></script>
+    <script src="js/site.js?v=book11"></script>
     <script>
         function closeModal() {
             document.getElementById('success-modal').style.display = 'none';

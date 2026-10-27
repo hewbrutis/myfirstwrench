@@ -1,8 +1,8 @@
 /**
  * My First Wrench - site behavior (updated Oct 2026)
  *
- * The booking form on book.html now uses a real POST to /api/book instead of mailto.
- * This removes the "your email app should open" message completely.
+ * The booking form on book.html posts to Formspree (form action) and shows
+ * the in-page success modal. No mailto, no MailChannels.
  */
 
 (function () {
@@ -191,8 +191,12 @@
         if (status) status.textContent = "Add your name and a way to reach you.";
         return;
       }
-      if (!emailVal && !phoneVal) {
-        if (status) status.textContent = "Add an email or a phone number.";
+      if (!emailVal) {
+        if (status) status.textContent = "Add an email so Raz can write you back.";
+        return;
+      }
+      if (!phoneVal) {
+        if (status) status.textContent = "Add a phone number.";
         return;
       }
       if (!pref) {
@@ -207,6 +211,10 @@
         if (status) status.textContent = "Add a phone number - that's the best way you picked.";
         return;
       }
+      if (!year || !make || !model) {
+        if (status) status.textContent = "Add the year, make, and model of the car.";
+        return;
+      }
       var waiver = form.elements.namedItem("waiver");
       if (waiver && !waiver.checked) {
         if (status) status.textContent = "Check the waiver before you send. You cannot hold Raz liable if someone gets hurt.";
@@ -216,35 +224,47 @@
 
       var wants = pkg || skill || "Not sure yet";
       var vehicle = [year, make, model].filter(Boolean).join(" ");
+      var endpoint = form.getAttribute("action") || "https://formspree.io/f/mbggobpn";
+      var payload = new FormData(form);
+      payload.set("_replyto", emailVal);
+      payload.set("_cc", "myfirstwrench@gmail.com," + emailVal);
+      payload.set("email", emailVal);
+      payload.set("wants", wants);
+      payload.set("vehicle", vehicle);
+      if (vin) payload.set("vin", vin);
 
-      // Direct POST to our Cloudflare Function - this is what replaces the old mailto behavior
-      fetch('/api/book', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: name,
-          email: emailVal,
-          phone: phoneVal,
-          contactPref: pref,
-          wants: wants,
-          vehicle: vehicle,
-          vin: vin,
-          message: note,
-          waiverAccepted: true
-        })
+      var submitBtn = document.getElementById("submit-btn");
+      if (submitBtn) submitBtn.disabled = true;
+      if (status) status.textContent = "Sending…";
+
+      fetch(endpoint, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: payload
       })
-      .then(function(res) {
-        if (res.ok) {
-          document.getElementById('success-modal').style.display = 'block';
+      .then(function (res) {
+        return res.json().then(function (data) {
+          return { ok: res.ok, data: data };
+        }).catch(function () {
+          return { ok: res.ok, data: {} };
+        });
+      })
+      .then(function (result) {
+        if (result.ok) {
+          var modal = document.getElementById("success-modal");
+          if (modal) modal.style.display = "block";
           form.reset();
-          if (status) status.textContent = '';
+          if (status) status.textContent = "";
         } else {
-          if (status) status.textContent = 'Something went wrong. Please try again or email myfirstwrench@gmail.com directly.';
+          if (status) status.textContent = "Something went wrong. Please try again or email myfirstwrench@gmail.com directly.";
         }
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.error(err);
-        if (status) status.textContent = 'Could not send message right now. Please email myfirstwrench@gmail.com directly.';
+        if (status) status.textContent = "Could not send message right now. Please email myfirstwrench@gmail.com directly.";
+      })
+      .then(function () {
+        if (submitBtn) submitBtn.disabled = false;
       });
     });
   }
@@ -279,6 +299,8 @@
   function fail() {
     var warn = document.getElementById("offerings-status");
     if (warn) warn.hidden = false;
+    wireForm();
+    wireVehiclePicker();
   }
 
   function wireChoiceOr() {

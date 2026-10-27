@@ -1,100 +1,95 @@
+/**
+ * Legacy booking endpoint.
+ * Older cached pages still POST JSON here. Forward those to Formspree
+ * so Raz and the customer both get email without MailChannels.
+ */
+const FORMSPREE = "https://formspree.io/f/mbggobpn";
+const OWNER = "myfirstwrench@gmail.com";
+
+function text(obj, status) {
+  return new Response(JSON.stringify(obj), {
+    status: status,
+    headers: { "Content-Type": "application/json" }
+  });
+}
+
+async function readBody(request) {
+  const type = (request.headers.get("content-type") || "").toLowerCase();
+  if (type.includes("application/json")) {
+    return await request.json();
+  }
+  const fd = await request.formData();
+  const obj = {};
+  fd.forEach(function (value, key) {
+    obj[key] = String(value);
+  });
+  return obj;
+}
+
 export async function onRequestPost({ request }) {
   try {
-    const payload = await request.json();
-
-    const {
-      name = '',
-      email = '',
-      phone = '',
-      contactPref = '',
-      wants = 'Not sure yet',
-      vehicle = '',
-      vin = '',
-      message = '',
-      waiverAccepted = false
-    } = payload;
+    const payload = await readBody(request);
+    const name = String(payload.name || "").trim();
+    const email = String(payload.email || payload._replyto || "").trim();
+    const phone = String(payload.phone || "").trim();
+    const contactPref = String(payload.contactPref || payload["contact-pref"] || "").trim();
+    const wants = String(payload.wants || payload.package || payload.skill || "Not sure yet").trim();
+    const vehicle = String(payload.vehicle || [payload.year, payload.make, payload.model].filter(Boolean).join(" ")).trim();
+    const vin = String(payload.vin || "").trim();
+    const message = String(payload.message || "").trim();
+    const waiver = payload.waiverAccepted || payload.waiver || "";
 
     if (!name || !email || !phone || !vehicle) {
-      return new Response(JSON.stringify({ success: false, error: 'Name, email, phone, and vehicle are required' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      return text({ success: false, error: "Name, email, phone, and vehicle are required" }, 400);
     }
 
-    const bookingBody = `
-New Booking Request from My First Wrench
+    const body = new URLSearchParams();
+    body.set("_subject", "New Booking Request - My First Wrench");
+    body.set("_replyto", email);
+    body.set("_cc", OWNER + "," + email);
+    body.set("name", name);
+    body.set("email", email);
+    body.set("phone", phone);
+    body.set("contact-pref", contactPref);
+    body.set("wants", wants);
+    body.set("vehicle", vehicle);
+    body.set("vin", vin);
+    body.set("message", message);
+    body.set("waiver", String(waiver || "accepted"));
 
-Name: ${name}
-Email: ${email}
-Phone: ${phone}
-Preferred contact: ${contactPref || 'Not specified'}
-Wants to learn: ${wants}
-Vehicle: ${vehicle}
-VIN: ${vin || 'None provided'}
-Additional notes: ${message || 'None'}
-Waiver accepted: ${waiverAccepted ? 'YES' : 'NO'}
-Submitted: ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })}
-    `.trim();
-
-    // Send to Raz using Gmail connector style (but since this is CF Pages, we use a working fetch to a simple endpoint or direct if possible. For now we keep a minimal working version that has been proven in test)
-    // Note: The real fix is that the function must be syntactically perfect. This version is clean.
-
-    const toOwner = {
-      personalizations: [{ to: [{ email: 'myfirstwrench@gmail.com', name: 'Raz' }] }],
-      from: { email: 'bookings@myfirstwrench.com', name: 'My First Wrench Booking' },
-      subject: `New Booking - ${name} - ${vehicle}`,
-      content: [{ type: 'text/plain', value: bookingBody }]
-    };
-
-    await fetch('https://api.mailchannels.net/tx/v1/send', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(toOwner)
+    const res = await fetch(FORMSPREE, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: body.toString()
     });
 
-    const confirmBody = `
-Thank you for your booking request with My First Wrench!
+    let data = {};
+    try {
+      data = await res.json();
+    } catch (err) {
+      data = {};
+    }
 
-Your request has been received and Raz will reach out to you shortly to schedule a time.
+    if (!res.ok) {
+      return text({
+        success: false,
+        error: (data && data.error) || "Formspree rejected the booking"
+      }, res.status || 502);
+    }
 
-**Your Booking Summary**
-Name: ${name}
-Vehicle: ${vehicle}
-Interest: ${wants}
-Preferred contact: ${contactPref || 'Not specified'}
-Phone: ${phone}
-
-Payments are taken after the lesson is completed. Parts and fluids are charged at exact cost.
-
-Thank you,
-Raz
-My First Wrench
-Kuna, Idaho
-    `.trim();
-
-    const toCustomer = {
-      personalizations: [{ to: [{ email: email, name: name }] }],
-      from: { email: 'bookings@myfirstwrench.com', name: 'My First Wrench' },
-      subject: 'Booking Request Received - My First Wrench',
-      content: [{ type: 'text/plain', value: confirmBody }]
-    };
-
-    await fetch('https://api.mailchannels.net/tx/v1/send', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(toCustomer)
-    });
-
-    return new Response(
-      JSON.stringify({ success: true, message: "Booking request sent successfully! Raz will be reaching out shortly." }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
-    );
-
+    return text({
+      success: true,
+      ok: true,
+      message: "Booking request sent successfully! Raz will be reaching out shortly."
+    }, 200);
   } catch (err) {
-    console.error('Booking function error:', err);
-    return new Response(
-      JSON.stringify({ success: false, error: 'Internal error - please try again or email myfirstwrench@gmail.com directly' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
+    console.error("Booking function error:", err);
+    return text({
+      success: false,
+      error: "Internal error - please try again or email myfirstwrench@gmail.com directly"
+    }, 500);
   }
 }
