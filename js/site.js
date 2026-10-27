@@ -1,12 +1,10 @@
 /**
- * My First Wrench - site behavior
+ * My First Wrench - site behavior (updated Oct 2026)
  *
- * Prices, packages, ad copy, and the contact email are NOT in this file.
- * They live in /offerings.json. This script fetches that file and fills the
- * page so a price change in one place updates every page.
- *
- * To edit offerings: open offerings.json (see README.md).
+ * The booking form on book.html now uses a real POST to /api/book instead of mailto.
+ * This removes the "your email app should open" message completely.
  */
+
 (function () {
   "use strict";
 
@@ -139,8 +137,7 @@
   function fillBookForm(data) {
     var forms = document.querySelectorAll("[data-book-form]");
     forms.forEach(function (form) {
-      form.setAttribute("action", "mailto:" + data.contact.email);
-
+      // no longer sets mailto action
       var select = form.querySelector("#package");
       if (select) {
         var current = select.value;
@@ -170,14 +167,14 @@
     });
   }
 
-  function wireForm(data) {
+  function wireForm() {
     var form = document.getElementById("book-form");
     if (!form) return;
     var status = document.getElementById("form-status");
-    var email = data.contact.email;
 
     form.addEventListener("submit", function (event) {
       event.preventDefault();
+
       var name = ((form.elements.namedItem("name") || {}).value || "").trim();
       var emailVal = ((form.elements.namedItem("email") || {}).value || "").trim();
       var phoneVal = ((form.elements.namedItem("phone") || {}).value || "").trim();
@@ -217,45 +214,38 @@
         return;
       }
 
-      var pkgLabel = pkg;
-      data.packages.forEach(function (p) {
-        if (p.id === pkg) pkgLabel = optionLabel(p);
-      });
-
-      var skillField = form.elements.namedItem("skill");
-      var skillLabel = skill;
-      if (skillField && skillField.options && skillField.selectedIndex >= 0) {
-        skillLabel = skillField.options[skillField.selectedIndex].text || skill;
-      }
-      var wants = "not sure yet";
-      if (pkg) wants = pkgLabel;
-      else if (skill) wants = skillLabel;
-
+      var wants = pkg || skill || "Not sure yet";
       var vehicle = [year, make, model].filter(Boolean).join(" ");
-      var prefLabel = pref === "text" ? "Text" : pref === "phone" ? "Phone" : pref === "email" ? "Email" : pref;
-      var lines = [
-        "Hi Raz - I want to book a driveway lesson.",
-        "Name: " + name,
-        "Email: " + (emailVal || "not given"),
-        "Phone: " + (phoneVal || "not given"),
-        "Best way to contact: " + prefLabel,
-        "Wants: " + wants,
-      ];
-      lines.push("Vehicle: " + (vehicle || "not given"));
-      if (vin) lines.push("VIN: " + vin);
-      if (note) lines.push("Note: " + note);
-      if (waiver && waiver.checked) {
-        lines.push("Waiver: accepted - I will not hold Raz or My First Wrench liable if someone gets hurt.");
-      }
 
-      var body = encodeURIComponent(lines.join("\n"));
-      var subject = encodeURIComponent("My First Wrench booking");
-      window.location.href = "mailto:" + email + "?subject=" + subject + "&body=" + body;
-
-      if (status) {
-        status.textContent =
-          "Your email app should open with the booking note. If it does not, email " + email + ".";
-      }
+      // Direct POST to our Cloudflare Function - this is what replaces the old mailto behavior
+      fetch('/api/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          email: emailVal,
+          phone: phoneVal,
+          contactPref: pref,
+          wants: wants,
+          vehicle: vehicle,
+          vin: vin,
+          message: note,
+          waiverAccepted: true
+        })
+      })
+      .then(function(res) {
+        if (res.ok) {
+          document.getElementById('success-modal').style.display = 'block';
+          form.reset();
+          if (status) status.textContent = '';
+        } else {
+          if (status) status.textContent = 'Something went wrong. Please try again or email myfirstwrench@gmail.com directly.';
+        }
+      })
+      .catch(function(err) {
+        console.error(err);
+        if (status) status.textContent = 'Could not send message right now. Please email myfirstwrench@gmail.com directly.';
+      });
     });
   }
 
@@ -276,7 +266,7 @@
     renderPackages(data.packages || [], data.contact.cta);
     renderPosts(data.posts || []);
     fillBookForm(data);
-    wireForm(data);
+    wireForm();           // no longer needs the data object
     wireVehiclePicker();
 
     document.querySelectorAll("[data-offerings-ready]").forEach(function (el) {
