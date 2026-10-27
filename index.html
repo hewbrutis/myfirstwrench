@@ -21,7 +21,7 @@
                 <a href="customer-savings.html">Customer Savings</a>
                 <a href="the-math.html">The Math</a>
                 <a href="faq.html">FAQ</a>
-                <a class="btn" href="#book">Book a Session</a>
+                <a class="btn" href="book.html">Book a Session</a>
             </div>
         </nav>
 
@@ -33,15 +33,15 @@
         </header>
 
         <nav class="price-strip" data-price-strip aria-label="Lesson prices">
-            <a href="#packages">
+            <a href="packages.html">
                 <span class="price-strip-name">One Skill Session</span>
                 <span class="price-strip-amount">$125</span>
             </a>
-            <a href="#packages" class="featured-price">
+            <a href="packages.html" class="featured-price">
                 <span class="price-strip-name">Core 3</span>
                 <span class="price-strip-amount">$350</span>
             </a>
-            <a href="#packages">
+            <a href="packages.html">
                 <span class="price-strip-name">Full Basics Package</span>
                 <span class="price-strip-amount">$595</span>
             </a>
@@ -143,91 +143,9 @@
             <p><a class="section-link" href="about.html">Read the full story</a></p>
         </section>
 
-        <section id="book">
-            <h2>Message Raz to Book</h2>
-            <p>Tell me who is learning, which package you want, and how to reach you. We pick a convenient time first. Payments taken after the job is finished.</p>
-            <form id="book-form" data-book-form style="margin-top:25px;" action="mailto:myfirstwrench@gmail.com">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                </div>
-                <div class="row">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone" placeholder="555-555-5555" autocomplete="tel">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="contact-pref">Best way to contact you</label>
-                    <select id="contact-pref" name="contact-pref" required>
-                        <option value="">Choose one</option>
-                        <option value="phone">Phone</option>
-                        <option value="text">Text</option>
-                        <option value="email">Email</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="package">Select a Package</label>
-                    <select id="package" name="package">
-                        <option value="">Not sure yet</option>
-                        <option value="one-skill">One Skill Session - $125</option>
-                        <option value="core-3">Core 3 - $350</option>
-                        <option value="full-basics">Full Basics Package - $595</option>
-                    </select>
-                </div>
-                <fieldset class="vehicle-picker" data-vehicle-picker>
-                    <legend>The vehicle</legend>
-                    <p class="note-muted">Year, make, and model help me show up ready. Prefer to paste the VIN? I can look it up for you.</p>
-                    <div class="form-group">
-                        <label for="vin">VIN <span class="optional">(optional)</span></label>
-                        <div class="vin-row">
-                            <input type="text" id="vin" name="vin" maxlength="17" autocomplete="off" spellcheck="false" placeholder="17 characters on the dash or door sticker">
-                            <button type="button" class="btn btn-secondary" data-vin-lookup>Look up VIN</button>
-                        </div>
-                        <p class="note-muted" data-vin-status role="status" aria-live="polite"></p>
-                    </div>
-                    <div class="row row-3">
-                        <div class="form-group">
-                            <label for="year">Year</label>
-                            <input type="text" id="year" name="year" list="year-list" placeholder="Search year" autocomplete="off">
-                            <datalist id="year-list"></datalist>
-                        </div>
-                        <div class="form-group">
-                            <label for="make">Make</label>
-                            <input type="text" id="make" name="make" list="make-list" placeholder="Search make" autocomplete="off">
-                            <datalist id="make-list"></datalist>
-                        </div>
-                        <div class="form-group">
-                            <label for="model">Model</label>
-                            <input type="text" id="model" name="model" list="model-list" placeholder="Search model" autocomplete="off">
-                            <datalist id="model-list"></datalist>
-                        </div>
-                    </div>
-                </fieldset>
-                <div class="form-group">
-                    <label for="message">Anything else I should know?</label>
-                    <textarea id="message" name="message" rows="4" placeholder="Who is learning, Saturday vs weekday, parts on hand, dirt bike / four-wheeler, a job not listed..."></textarea>
-                </div>
-                <fieldset class="waiver">
-                    <legend>Required waiver</legend>
-                    <p>BY BOOKING THIS LESSON, YOU ARE AGREEING TO THE FOLLOWING LIABILITY WAIVER AND ASSUMPTION OF RISK.
-<p>1. Inherent Risks: You acknowledge that hands-on automotive lessons involve a real car and dangerous tools. Risks include the operation of car jacks, exposure to chemical fluids, and proximity to moving mechanical parts, all of which can cause serious bodily injury, disability, or death. By proceeding, you voluntarily assume all risks associated with the activity.</p>
-<p>2. Release of Liability: You agree to release, waive, and discharge Raz and My First Wrench, along with their employees and agents, from any and all liability, claims, or demands for personal injury, property damage, or wrongful death resulting from ordinary negligence during the course of the lesson.</p>
-<p>3. Minor Students: If the student attending the lesson is under the age of 18, you certify that you are their parent or legal guardian. By completing this booking, you give explicit permission for the minor to participate and agree to all terms of this liability release on their behalf.</p>
-                      <div class="waiver-check">
-                        <input id="waiver" name="waiver" type="checkbox" value="accepted" required>
-                        <label for="waiver"> Checking the agreement box and completing your booking serves as your electronic signature. You confirm that you have read this document in full, understand that you are waiving significant legal rights, and agree to it freely.</label>
-                    </div>
-                </fieldset>
-                <button type="submit" class="btn btn-center">Message Raz</button>
-                <p class="note-muted" style="text-align:center;">Your message will be sent directly. You will receive a confirmation email.</p>
-                <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-            </form>
-        </section>
+         <p style="text-align:center; margin-top:30px;">
+            <a class="btn" href="book.html">Message Raz to book</a>
+        </p>
         </main>
 
         <footer>
