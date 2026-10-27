@@ -1,8 +1,9 @@
 /**
  * My First Wrench - site behavior (updated Oct 2026)
  *
- * The booking form on book.html posts to Formspree (form action) and shows
- * the in-page success modal. No mailto, no MailChannels.
+ * Booking on book.html is a Formspree HTML form
+ * (https://formspree.io/f/mbggobpn). Submit is AJAX so the in-page
+ * success modal can show. No mailto, no MailChannels, no /api/book.
  */
 
 (function () {
@@ -137,7 +138,7 @@
   function fillBookForm(data) {
     var forms = document.querySelectorAll("[data-book-form]");
     forms.forEach(function (form) {
-      // no longer sets mailto action
+      // package dropdown only — form action stays on Formspree
       var select = form.querySelector("#package");
       if (select) {
         var current = select.value;
@@ -179,13 +180,9 @@
       var emailVal = ((form.elements.namedItem("email") || {}).value || "").trim();
       var phoneVal = ((form.elements.namedItem("phone") || {}).value || "").trim();
       var pref = ((form.elements.namedItem("contact-pref") || {}).value || "").trim();
-      var pkg = ((form.elements.namedItem("package") || {}).value || "").trim();
-      var skill = ((form.elements.namedItem("skill") || {}).value || "").trim();
       var year = ((form.elements.namedItem("year") || {}).value || "").trim();
       var make = ((form.elements.namedItem("make") || {}).value || "").trim();
       var model = ((form.elements.namedItem("model") || {}).value || "").trim();
-      var vin = ((form.elements.namedItem("vin") || {}).value || "").trim().toUpperCase();
-      var note = ((form.elements.namedItem("message") || {}).value || "").trim();
 
       if (!name) {
         if (status) status.textContent = "Add your name and a way to reach you.";
@@ -222,16 +219,8 @@
         return;
       }
 
-      var wants = pkg || skill || "Not sure yet";
-      var vehicle = [year, make, model].filter(Boolean).join(" ");
       var endpoint = form.getAttribute("action") || "https://formspree.io/f/mbggobpn";
       var payload = new FormData(form);
-      payload.set("_replyto", emailVal);
-      payload.set("_cc", "myfirstwrench@gmail.com," + emailVal);
-      payload.set("email", emailVal);
-      payload.set("wants", wants);
-      payload.set("vehicle", vehicle);
-      if (vin) payload.set("vin", vin);
 
       var submitBtn = document.getElementById("submit-btn");
       if (submitBtn) submitBtn.disabled = true;
