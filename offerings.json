@@ -11,7 +11,7 @@
   },
   "notes": {
     "partsExtra": "Parts and fluids are extra - you buy them, or I bill at cost. A parent can watch. If you are the one learning, you are welcome too.",
-    "partsFine": "Parts and fluids are not in the lesson price. You buy them, or I bill at cost."
+    "partsFine": "Parts and fluids are not included in the lesson price. You buy them ahead of time, or I bill them to you at exact cost."
   },
   "otherServices": {
     "title": "Dirt bikes, four-wheelers, and jobs not listed",
@@ -25,13 +25,12 @@
       "duration": "",
       "tag": "Start here",
       "featured": false,
-      "summary": "Oil, tires, or brakes. Pick one. Pick the job that already makes your stomach drop. We do that one until you can talk yourself through it. Next time it is just an afternoon, not an emergency. Anyone of any age can learn.",
+      "summary": "Oil, tires, or brakes. Pick one. Pick the job that you are least familiar with. I will make sure you are confident in yourself for the next time. Anyone of any age can learn.",
       "hero": "One focused lesson. Oil, tires, or brakes. Pick one.",
       "includes": [
         "Pick one skill: oil and filter, spare tire / tire change, or brake pads on one axle",
         "On your vehicle, in your driveway",
-        "The student turns the wrenches. I teach. I do not just do it for them",
-        "A parent can watch, or you can be the one learning"
+        "The student turns the wrenches. I hold the flashlight and teach."
       ]
     },
     {
@@ -39,16 +38,15 @@
       "name": "Core 3",
       "price": 350,
       "duration": "",
-      "tag": "Most useful",
+      "tag": "Most Useful",
       "featured": true,
-      "summary": "Oil + tires + brakes. The three things that leave a driver stranded on the shoulder looking around for a grown-up. After this, you are the grown-up. $25 less than booking those three as One Skill Sessions.",
+      "summary": "Oil + tires + brakes. The three things that leave a driver stranded on the shoulder looking around for someone to come help. After this, you are the person people call for help. $25 less than booking those three as One Skill Sessions.",
       "hero": "Oil, tires, and brakes. The set every driver should know.",
       "includes": [
         "Oil + tires + brake pads on two wheels (front or rear)",
         "Split across visits if one Saturday is not enough",
         "Brake day is the long one - already in the $350",
-        "$25 less than three separate One Skill Sessions",
-        "Anyone of any age can learn this set"
+        "$25 less than three separate One Skill Sessions"
       ]
     },
     {
@@ -62,8 +60,8 @@
       "hero": "Core 3 (oil, tires, brakes) + rotors + two extras you pick.",
       "includes": [
         "Core 3, plus rotors - oil, tires, and one-axle brakes included",
-        "Two extras you pick: headlights / taillights, spark plugs / coil packs, fluids checks, or air / cabin filters",
-        "Best before school, a new job, a long drive - or if you want the full set yourself",
+        "Two extras you pick: headlights / taillights, spark plugs / coil packs, fluids checks, air / cabin filters.",
+        "Best before school season starts, a new job, or a roadtrip.",
         "Split across visits if needed"
       ]
     }
