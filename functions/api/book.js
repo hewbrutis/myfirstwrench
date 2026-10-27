@@ -1,4 +1,4 @@
-export async function onRequestPost({ request, env }) {
+export async function onRequestPost({ request }) {
   try {
     const payload = await request.json();
 
@@ -14,8 +14,8 @@ export async function onRequestPost({ request, env }) {
       waiverAccepted = false
     } = payload;
 
-    if (!email || !name || !vehicle) {
-      return new Response(JSON.stringify({ success: false, error: 'Name, email, and vehicle are required' }), {
+    if (!email || !name || !vehicle || !phone) {
+      return new Response(JSON.stringify({ success: false, error: 'Name, email, phone, and vehicle are required' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
       });
@@ -26,7 +26,7 @@ New Booking Request from My First Wrench
 
 Name: ${name}
 Email: ${email}
-Phone: ${phone || 'Not provided'}
+Phone: ${phone}
 Preferred contact: ${contactPref || 'Not specified'}
 Wants to learn: ${wants}
 Vehicle: ${vehicle}
@@ -36,7 +36,7 @@ Waiver accepted: ${waiverAccepted ? 'YES' : 'NO'}
 Submitted: ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })}
     `.trim();
 
-    // Send to Raz
+    // Send to Raz (myfirstwrench@gmail.com)
     const razResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
       method: 'POST',
       headers: {
@@ -58,11 +58,9 @@ Submitted: ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })}
       })
     });
 
-    let razResult = 'sent';
     if (!razResponse.ok) {
       const errorText = await razResponse.text();
       console.error('MailChannels Raz error:', errorText);
-      razResult = 'failed';
     }
 
     // Send confirmation to customer
@@ -76,6 +74,7 @@ Name: ${name}
 Vehicle: ${vehicle}
 Interest: ${wants}
 Preferred contact: ${contactPref || 'Not specified'}
+Phone: ${phone}
 
 Payments are taken after the lesson is completed. Parts and fluids are charged at exact cost.
 
@@ -114,7 +113,7 @@ Kuna, Idaho
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: "Booking request sent successfully. Check both inboxes." 
+        message: "Booking request sent successfully!" 
       }),
       { 
         status: 200, 
