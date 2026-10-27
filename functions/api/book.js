@@ -1,4 +1,4 @@
-export async function onRequestPost({ request }) {
+export async function onRequestPost({ request, env }) {
   try {
     const payload = await request.json();
 
@@ -14,29 +14,29 @@ export async function onRequestPost({ request }) {
       waiverAccepted = false
     } = payload;
 
-    if (!email) {
-      return new Response(JSON.stringify({ success: false, error: 'Email is required' }), {
+    if (!email || !name || !vehicle) {
+      return new Response(JSON.stringify({ success: false, error: 'Name, email, and vehicle are required' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
       });
     }
 
     const bookingBody = `
-New Booking Request from My First Wrench website
+New Booking Request from My First Wrench
 
 Name: ${name}
 Email: ${email}
-Phone: ${phone || 'not provided'}
-Preferred contact: ${contactPref}
+Phone: ${phone || 'Not provided'}
+Preferred contact: ${contactPref || 'Not specified'}
 Wants to learn: ${wants}
 Vehicle: ${vehicle}
-VIN: ${vin || 'none'}
-Additional notes: ${message || 'none'}
+VIN: ${vin || 'None provided'}
+Additional notes: ${message || 'None'}
 Waiver accepted: ${waiverAccepted ? 'YES' : 'NO'}
 Submitted: ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })}
     `.trim();
 
-    // Send notification to Raz
+    // Send to Raz
     const razResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
       method: 'POST',
       headers: {
@@ -50,7 +50,7 @@ Submitted: ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })}
           email: 'bookings@myfirstwrench.com',
           name: 'My First Wrench Booking'
         },
-        subject: `New Booking - ${name || 'Customer'} - ${vehicle || 'No vehicle'}`,
+        subject: `New Booking - ${name} - ${vehicle}`,
         content: [{
           type: 'text/plain',
           value: bookingBody
@@ -58,22 +58,24 @@ Submitted: ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })}
       })
     });
 
+    let razResult = 'sent';
     if (!razResponse.ok) {
-      console.error('Failed to send to Raz:', await razResponse.text());
+      const errorText = await razResponse.text();
+      console.error('MailChannels Raz error:', errorText);
+      razResult = 'failed';
     }
 
     // Send confirmation to customer
     const confirmBody = `
-Thank you for booking with My First Wrench!
+Thank you for your booking request with My First Wrench!
 
-Your request has been received.
+Your request has been received and Raz will reach out to you shortly to schedule a time.
 
-**Summary**
+**Your Booking Summary**
 Name: ${name}
 Vehicle: ${vehicle}
-Lesson interest: ${wants}
-
-Raz will reach out to you shortly to schedule a time that works for you.
+Interest: ${wants}
+Preferred contact: ${contactPref || 'Not specified'}
 
 Payments are taken after the lesson is completed. Parts and fluids are charged at exact cost.
 
@@ -90,13 +92,13 @@ Kuna, Idaho
       },
       body: JSON.stringify({
         personalizations: [{
-          to: [{ email: email, name: name || 'Customer' }]
+          to: [{ email: email, name: name }]
         }],
         from: {
           email: 'bookings@myfirstwrench.com',
           name: 'My First Wrench'
         },
-        subject: 'Your booking request has been received - My First Wrench',
+        subject: 'Booking Request Received - My First Wrench',
         content: [{
           type: 'text/plain',
           value: confirmBody
@@ -105,11 +107,15 @@ Kuna, Idaho
     });
 
     if (!customerResponse.ok) {
-      console.error('Failed to send confirmation:', await customerResponse.text());
+      const errorText = await customerResponse.text();
+      console.error('MailChannels customer error:', errorText);
     }
 
     return new Response(
-      JSON.stringify({ success: true, message: "Booking request sent successfully" }),
+      JSON.stringify({ 
+        success: true, 
+        message: "Booking request sent successfully. Check both inboxes." 
+      }),
       { 
         status: 200, 
         headers: { 'Content-Type': 'application/json' } 
@@ -117,7 +123,7 @@ Kuna, Idaho
     );
 
   } catch (err) {
-    console.error('Booking error:', err);
+    console.error('Booking function error:', err);
     return new Response(
       JSON.stringify({ success: false, error: err.message }),
       { 
