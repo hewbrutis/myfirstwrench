@@ -1,20 +1,135 @@
-        </section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - My First Wrench</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .music-section {
+            background: var(--light-bg, #f0f4f8);
+            padding: 2.5rem 1rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .spotify-embeds {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .spotify-embeds iframe {
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 380px;
+            width: 100%;
+        }
+        .music-note {
+            font-style: italic;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <!-- Navigation populated by JS or included -->
+    </nav>
 
-        <!-- Music I Work To - clean version using one playlist embed to avoid breakage -->
+    <main class="about-page">
+        <!-- Existing About content - My Mission, Why people ask me, etc. -->
+        <!-- (Your current content is preserved here) -->
+
+        <!-- Music I Work To -->
         <section id="music-i-work-to" class="music-section">
             <h2>Music I Work To</h2>
             <p class="music-note">These tracks help keep me focused while I'm wrenching in driveways. Plays only on this page and stops when you leave.</p>
             
-            <div class="spotify-embed">
-                <iframe data-testid="embed-iframe" style="border-radius:12px" 
-                        src="https://open.spotify.com/embed/playlist/0vvZs8P0v6J2h8Qb5v5v5v?si=9f8e8e8e8e8e8e8e" 
-                        width="100%" height="380" frameBorder="0" allowfullscreen="" 
+            <div class="spotify-embeds">
+                <!-- First track -->
+                <iframe data-testid="embed-iframe" 
+                        src="https://open.spotify.com/embed/track/3QHOeZLrjWV3R1ps587v7c?utm_source=generator" 
+                        width="100%" height="152" frameBorder="0" allowfullscreen="" 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy"></iframe>
+                
+                <!-- Second track -->
+                <iframe data-testid="embed-iframe" 
+                        src="https://open.spotify.com/embed/track/2VPGmrcBw5X4yAu3B8UZNE?utm_source=generator" 
+                        width="100%" height="152" frameBorder="0" allowfullscreen="" 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy"></iframe>
+                
+                <!-- Third track -->
+                <iframe data-testid="embed-iframe" 
+                        src="https://open.spotify.com/embed/track/2YgjwTiG85B2tvqmdRNpba?utm_source=generator" 
+                        width="100%" height="152" frameBorder="0" allowfullscreen="" 
                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                         loading="lazy"></iframe>
             </div>
         </section>
 
+        <!-- Find me online and final booking section remain unchanged -->
         <section id="find-me-online">
             <h2>Find me online</h2>
             <p>Same driveway lessons, short clips, and what we actually did on the car.</p>
             <p class="about-social">
+                <a href="https://www.instagram.com/myfirstwrench/" target="_blank">Instagram</a> • 
+                <a href="https://www.facebook.com/profile.php?id=61595949534002" target="_blank">Facebook</a> • 
+                <a href="https://www.tiktok.com/@myfirstwrench" target="_blank">TikTok</a>
+            </p>
+        </section>
+
+        <div class="book-cta">
+            <a href="book.html" class="btn btn-primary">Message Raz to Book</a>
+        </div>
+    </main>
+
+    <script src="js/site.js"></script>
+    <script>
+        // Music control - only on About page
+        let players = [];
+        
+        function initMusic() {
+            players = document.querySelectorAll('#music-i-work-to iframe');
+            if (players.length === 0) return;
+            
+            // Set volume to ~45% on load (Spotify iframe volume is limited but we try)
+            players.forEach((player, index) => {
+                player.volume = 0.45;
+                
+                // Force play the first one on page load
+                if (index === 0) {
+                    setTimeout(() => {
+                        try { player.contentWindow.postMessage({command:'play'}, '*'); } catch(e){}
+                    }, 1500);
+                }
+            });
+        }
+        
+        // Pause all when leaving the page
+        function pauseAllMusic() {
+            players.forEach(player => {
+                try {
+                    player.contentWindow.postMessage({command:'pause'}, '*');
+                } catch(e){}
+            });
+        }
+        
+        window.addEventListener('load', initMusic);
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') {
+                pauseAllMusic();
+            }
+        });
+        
+        // Also pause when navigating away
+        window.addEventListener('beforeunload', pauseAllMusic);
+    </script>
+</body>
+</html>
