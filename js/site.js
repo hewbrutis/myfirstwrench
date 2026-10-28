@@ -500,28 +500,29 @@
 
     // === Music I Work To - Autoplay only on About page + auto-pause when leaving ===
     function setupMusicPlayer() {
-        const isAboutPage = document.body.classList.contains('page-about');
+        const isAboutPage = document.body.classList.contains('page-about') || window.location.pathname.includes('about');
         if (!isAboutPage) return;
 
-        const iframes = document.querySelectorAll('#music-i-work-to iframe');
-        
-        // Set volume to ~45% and ensure autoplay
-        iframes.forEach(iframe => {
+        const iframe = document.querySelector('#music-i-work-to iframe');
+        if (!iframe) return;
+
+        // Set volume to ~45%
+        try {
             iframe.volume = 0.45;
-        });
+        } catch(e) {}
 
-        // Pause all embeds when tab/page loses focus
-        document.addEventListener('visibilitychange', () => {
-            iframes.forEach(iframe => {
-                if (document.hidden) {
-                    try {
-                        iframe.contentWindow.postMessage({command: 'pause'}, '*');
-                    } catch(e) {}
-                }
-            });
-        });
+        // Pause when leaving the page/tab
+        const pauseOnLeave = () => {
+            if (document.hidden && iframe.contentWindow) {
+                try {
+                    iframe.contentWindow.postMessage({command: 'pause'}, '*');
+                } catch(e) {}
+            }
+        };
 
-        console.log('%cMusic I Work To player ready — 45% volume, pauses on leave', 'color:#d97706; font-size:12px');
+        document.addEventListener('visibilitychange', pauseOnLeave);
+
+        console.log('%cMusic I Work To ready — 45% volume, pauses when leaving page', 'color:#d97706; font-size:12px');
     }
 
     // Initialize when page loads
