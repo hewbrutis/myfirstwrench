@@ -18,7 +18,7 @@ body {
     font-family: 'Segoe UI', system-ui, sans-serif;
     line-height: 1.6;
     color: var(--text);
-    background: #f8fafc;
+    background: var(--light-bg);
 }
 
 .container {
@@ -43,96 +43,133 @@ nav {
     text-decoration: none;
     color: var(--navy);
     font-weight: 700;
-    font-size: 1.4rem;
+    font-size: 1.75rem;
 }
 
 .logo img {
+    height: 60px;
     margin-right: 12px;
 }
 
 .nav-links {
     display: flex;
-    gap: 1.75rem;
-    align-items: center;
+    gap: 2rem;
+    list-style: none;
 }
 
 .nav-links a {
-    text-decoration: none;
     color: var(--navy);
-    font-weight: 500;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
 }
 
-.nav-links a.btn {
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+/* Hero / About specific */
+.hero {
+    position: relative;
+    min-height: 500px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 3rem;
+    max-width: 700px;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(12, 74, 110, 0.65);
+    z-index: 1;
+}
+
+/* Content cards */
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+.navy-card {
+    background: var(--navy);
+    color: white;
+    border: none;
+}
+
+.navy-card h2,
+.navy-card h3 {
+    color: white;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
     background: var(--primary);
     color: white;
-    padding: 0.65rem 1.25rem;
-    border-radius: 8px;
-    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    max-width: 320px;
+    margin: 1.5rem auto 0;
+    display: block;
 }
 
 .btn:hover {
     background: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgb(194 65 12 / 0.4);
 }
 
-/* Hero & General */
-.hero {
-    text-align: center;
-    padding: 3rem 0 4rem;
+/* Form buttons get special treatment */
+.book-btn {
+    background: #16a34a;
+    font-size: 1.25rem;
+    padding: 18px 40px;
 }
 
-.tagline {
-    color: var(--primary);
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 1px;
+.book-btn:hover {
+    background: #15803d;
 }
 
-h1 {
-    font-size: 3rem;
-    margin: 1rem 0;
-    color: var(--navy);
-}
-
-.subheadline {
-    font-size: 1.35rem;
-    max-width: 700px;
-    margin: 0 auto;
-    color: var(--gray);
-}
-
-/* Sections */
-section {
-    margin-bottom: 4rem;
+/* Music section (kept minimal and safe) */
+.music-section {
     background: white;
-    padding: 2.5rem;
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 }
 
-h2 {
-    color: var(--navy);
-    margin-bottom: 1.25rem;
-    font-size: 1.85rem;
-}
-
-/* About specific */
-.about-underlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.12;
-    background-size: cover;
-    background-position: center;
-    pointer-events: none;
-}
-
-.page-about .about-underlay img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.spotify-embed {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
 /* Footer */
@@ -140,18 +177,17 @@ footer {
     text-align: center;
     padding: 3rem 0 2rem;
     color: var(--gray);
-    font-size: 0.95rem;
-    border-top: 1px solid #e2e8f0;
+    border-top: 2px solid #e2e8f0;
     margin-top: 4rem;
 }
 
 footer a {
-    color: var(--gray);
+    color: var(--navy);
     text-decoration: none;
 }
 
 footer a:hover {
-    color: var(--navy);
+    color: var(--primary);
 }
 
 /* Responsive */
@@ -159,6 +195,5 @@ footer a:hover {
     h1 { font-size: 2.4rem; }
     .nav-links { gap: 1rem; font-size: 0.95rem; }
     section { padding: 2rem 1.5rem; margin-bottom: 2.5rem; }
+    .hero-content { padding: 2rem 1.5rem; }
 }
-
-/* Music section completely removed - clean version restored */
