@@ -497,3 +497,32 @@
   wireSavingsTabs();
   wireChoiceOr();
 })();
+
+    // === Music I Work To - Autoplay only on About page + auto-pause when leaving ===
+    function setupMusicPlayer() {
+        const isAboutPage = document.body.classList.contains('page-about');
+        if (!isAboutPage) return;
+
+        const iframes = document.querySelectorAll('#music-i-work-to iframe');
+        
+        // Set volume to ~45% and ensure autoplay
+        iframes.forEach(iframe => {
+            iframe.volume = 0.45;
+        });
+
+        // Pause all embeds when tab/page loses focus
+        document.addEventListener('visibilitychange', () => {
+            iframes.forEach(iframe => {
+                if (document.hidden) {
+                    try {
+                        iframe.contentWindow.postMessage({command: 'pause'}, '*');
+                    } catch(e) {}
+                }
+            });
+        });
+
+        console.log('%cMusic I Work To player ready — 45% volume, pauses on leave', 'color:#d97706; font-size:12px');
+    }
+
+    // Initialize when page loads
+    window.addEventListener('load', setupMusicPlayer);
