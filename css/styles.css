@@ -1,50 +1,164 @@
-/* Music I Work To section */
-.music-section {
-    background: var(--light-bg);
-    padding: 2.5rem 2rem;
-    border-radius: 16px;
-    margin: 3rem 0;
-    box-shadow: 0 4px 20px rgba(30, 41, 59, 0.08);
+/* Base styles for My First Wrench */
+:root {
+    --primary: #c2410c;
+    --primary-dark: #9a3412;
+    --light-bg: #f0f9ff;
+    --navy: #0c4a6e;
+    --text: #1e2937;
+    --gray: #64748b;
 }
 
-.music-section h2 {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background: #f8fafc;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 2px solid #e2e8f0;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.logo img {
+    margin-right: 12px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.75rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--navy);
+    font-weight: 500;
+}
+
+.nav-links a.btn {
+    background: var(--primary);
+    color: white;
+    padding: 0.65rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.btn:hover {
+    background: var(--primary-dark);
+}
+
+/* Hero & General */
+.hero {
+    text-align: center;
+    padding: 3rem 0 4rem;
+}
+
+.tagline {
     color: var(--primary);
-    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
-.music-note {
-    color: #475569;
-    font-style: italic;
-    margin-bottom: 1.5rem;
-    max-width: 600px;
+h1 {
+    font-size: 3rem;
+    margin: 1rem 0;
+    color: var(--navy);
 }
 
-.spotify-grid {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.subheadline {
+    font-size: 1.35rem;
+    max-width: 700px;
+    margin: 0 auto;
+    color: var(--gray);
 }
 
-.spotify-grid iframe {
+/* Sections */
+section {
+    margin-bottom: 4rem;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+h2 {
+    color: var(--navy);
+    margin-bottom: 1.25rem;
+    font-size: 1.85rem;
+}
+
+/* About specific */
+.about-underlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.12;
+    background-size: cover;
+    background-position: center;
+    pointer-events: none;
 }
 
-.spotify-embed iframe {
+.page-about .about-underlay img {
     width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
+    height: 100%;
+    object-fit: cover;
 }
 
-.spotify-embed iframe:hover {
-    transform: translateY(-4px);
+/* Footer */
+footer {
+    text-align: center;
+    padding: 3rem 0 2rem;
+    color: var(--gray);
+    font-size: 0.95rem;
+    border-top: 1px solid #e2e8f0;
+    margin-top: 4rem;
 }
 
-@media (max-width: 640px) {
-    .music-section {
-        padding: 2rem 1rem;
-    }
+footer a {
+    color: var(--gray);
+    text-decoration: none;
 }
+
+footer a:hover {
+    color: var(--navy);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 { font-size: 2.4rem; }
+    .nav-links { gap: 1rem; font-size: 0.95rem; }
+    section { padding: 2rem 1.5rem; margin-bottom: 2.5rem; }
+}
+
+/* Music section completely removed - clean version restored */
