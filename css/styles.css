@@ -157,21 +157,6 @@ nav {
     background: #15803d;
 }
 
-/* Music section (kept minimal and safe) */
-.music-section {
-    background: white;
-    border-radius: 16px;
-    padding: 2rem;
-    margin: 2rem 0;
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-}
-
-.spotify-embed {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-}
-
 /* Footer */
 footer {
     text-align: center;
@@ -196,4 +181,14 @@ footer a:hover {
     .nav-links { gap: 1rem; font-size: 0.95rem; }
     section { padding: 2rem 1.5rem; margin-bottom: 2.5rem; }
     .hero-content { padding: 2rem 1.5rem; }
+}
+
+/* Remove any skip-to-content that might be visible */
+.skip-link {
+    position: absolute !important;
+    left: -9999px !important;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }
